@@ -1,21 +1,17 @@
 package forth;
 
-import forth.commands.Command;
 
 import java.util.Stack;
 
 public class Context {
     private final Stack<Integer> numStack;
     public int parsedInt;
-
-//    private final Stack<Class<? extends Command>> cmdStack;
-//    private int cmdPointer;
+    public String parsedString;
 
     public Context() {
         numStack = new Stack<>();
-//        cmdStack = new Stack<>();
-//        cmdPointer = 0;
         parsedInt = 0;
+        parsedString = "";
     }
 
     public void pushNum(int num) {

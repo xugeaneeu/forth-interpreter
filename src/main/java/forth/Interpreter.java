@@ -4,18 +4,23 @@ import forth.commands.Command;
 
 public class Interpreter {
     private final Context context;
-    //TODO: StringBuilder instance
+    private final StringBuilder output;
 
     public Interpreter() {
         context = new Context();
+        output = new StringBuilder();
     }
 
-    public void interpret(String input, StringBuilder output) {
+    public String interpret(String input) {
         if (input.isEmpty()) {
-            return;
+            return null;
         }
+        output.setLength(0);
+
         String[] commands = input.split(" ");
-        for (String command: commands) {
+        String command;
+        for (int i = 0; i < commands.length; i++) {
+            command = commands[i];
             try {
                 context.parsedInt = Integer.parseInt(command);
                 command = "pushNumber";
@@ -23,8 +28,27 @@ public class Interpreter {
                 //noinspection EmptyCatchBlock
             }
 
+            if (command.equals(".\"")) {
+                StringBuilder sb = new StringBuilder();
+                i++;
+                while (i < commands.length) {
+                    sb.append(commands[i]);
+                    if (commands[i].endsWith("\"")) {
+                        break;
+                    }
+                    sb.append(" ");
+                    i++;
+                }
+                if (i == commands.length && !commands[i-1].endsWith("\"")) {
+                    throw new RuntimeException("Syntax error: .\" without ending \"");
+                }
+                context.parsedString = sb.substring(0, sb.toString().length() - 1);
+                command = "printString";
+            }
+
             Command cmd = CommandFactory.create(command);
             output.append(cmd.execute(context)).append(" ");
         }
+        return output.toString();
     }
 }

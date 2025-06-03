@@ -4,7 +4,7 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        BufferedReader input = null;
+        BufferedReader input;
         try {
             if (args.length == 0) {
                 input = new BufferedReader(new InputStreamReader(System.in));
@@ -21,14 +21,11 @@ public class Main {
 
         Interpreter interpreter = new Interpreter();
         BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
-        String inputLine = null;
-        StringBuilder outputLine = new StringBuilder();
+        String inputLine;
 
         while ((inputLine = input.readLine()) != null) {
-            interpreter.interpret(inputLine, outputLine); //TODO: RAII - убрать стрингбилдер в интерпретатор
-            output.write(outputLine.toString() + '\n');
+            output.write(interpreter.interpret(inputLine) + '\n');
             output.flush();
-            outputLine.setLength(0);
         }
 
         output.close();
