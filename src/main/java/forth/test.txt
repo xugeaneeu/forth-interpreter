@@ -1,0 +1,15 @@
+2 3 + . CR
+5 3 - . CR
+2 3 * . CR
+6 2 / . CR
+1 DUP . . CR
+1 2 DROP . CR
+1 2 SWAP . . CR
+1 2 OVER . . . CR
+1 2 3 ROT . . . CR
+3 2 > . CR
+2 3 > . CR
+2 3 < . CR
+3 2 < . CR
+2 2 = . CR
+2 3 = . CR
