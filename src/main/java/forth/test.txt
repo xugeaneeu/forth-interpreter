@@ -13,3 +13,10 @@
 3 2 < . CR
 2 2 = . CR
 2 3 = . CR
+." Hello from Forth!" CR
+." Testing string output." CR
+VARIABLE V1
+123 V1 !
+V1 @ . CR
+10 V1 !
+V1 @ . CR
