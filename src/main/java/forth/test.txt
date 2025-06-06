@@ -24,6 +24,6 @@ V1 @ . CR
 10 V1 !
 V1 @ . CR
 / Factorial calculate
-1 4
+1 5
 BEGIN DUP 1 > WHILE SWAP OVER * SWAP 1 - REPEAT
 DROP .

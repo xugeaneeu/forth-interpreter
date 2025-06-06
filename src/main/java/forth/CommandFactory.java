@@ -1,6 +1,7 @@
 package forth;
 
 import forth.commands.Command;
+import forth.exceptions.CommandNotFoundException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,7 +52,7 @@ public class CommandFactory {
   public static Command create(String name) {
     Supplier<Command> supp = commands.get(name);
     if (supp == null) {
-      throw new IllegalArgumentException("No such command: " + name);
+      throw new CommandNotFoundException("Command " + name + " not found");
     }
     return supp.get();
   }

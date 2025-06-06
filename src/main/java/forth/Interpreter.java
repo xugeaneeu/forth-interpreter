@@ -1,6 +1,7 @@
 package forth;
 
 import forth.commands.Command;
+import forth.exceptions.ParsingException;
 
 public class Interpreter {
   private final Context context;
@@ -53,7 +54,7 @@ public class Interpreter {
           context.currentPC++;
         }
         if (context.currentPC == commands.length && !commands[context.currentPC-1].endsWith("\"")) {
-          throw new RuntimeException("Syntax error: .\" without ending \"");
+          throw new ParsingException("Syntax error: .\" without ending \"");
         }
         context.parsedString = sb.substring(0, sb.toString().length() - 1);
         command = "printString";
@@ -62,7 +63,7 @@ public class Interpreter {
       //Processing VARIABLE command
       if (command.equals("VARIABLE")) {
         if (context.currentPC + 1 >= commands.length) {
-          throw new RuntimeException("VARIABLE without name");
+          throw new ParsingException("VARIABLE without name");
         }
         context.parsedVariable = commands[++context.currentPC];
       }
