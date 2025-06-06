@@ -19,8 +19,18 @@ public class Interpreter {
 
     String[] commands = input.split(" ");
     String command;
-    for (int i = 0; i < commands.length; i++) {
-      command = commands[i];
+
+    //Comment support
+    if (commands[0].equals("/")) {
+      return "";
+    }
+
+    for (context.currentPC = 0; context.currentPC < commands.length; context.currentPC++) {
+      command = commands[context.currentPC];
+
+      if (context.whileState == 0 && !command.equals("REPEAT")) {
+        continue;
+      }
 
       // Check if command is number
       try {
@@ -33,16 +43,16 @@ public class Interpreter {
       // Parsing string for printing
       if (command.equals(".\"")) {
         StringBuilder sb = new StringBuilder();
-        i++;
-        while (i < commands.length) {
-          sb.append(commands[i]);
-          if (commands[i].endsWith("\"")) {
+        context.currentPC++;
+        while (context.currentPC < commands.length) {
+          sb.append(commands[context.currentPC]);
+          if (commands[context.currentPC].endsWith("\"")) {
             break;
           }
           sb.append(" ");
-          i++;
+          context.currentPC++;
         }
-        if (i == commands.length && !commands[i-1].endsWith("\"")) {
+        if (context.currentPC == commands.length && !commands[context.currentPC-1].endsWith("\"")) {
           throw new RuntimeException("Syntax error: .\" without ending \"");
         }
         context.parsedString = sb.substring(0, sb.toString().length() - 1);
@@ -51,10 +61,10 @@ public class Interpreter {
 
       //Processing VARIABLE command
       if (command.equals("VARIABLE")) {
-        if (i + 1 >= commands.length) {
+        if (context.currentPC + 1 >= commands.length) {
           throw new RuntimeException("VARIABLE without name");
         }
-        context.parsedVariable = commands[++i];
+        context.parsedVariable = commands[++context.currentPC];
       }
 
       // Check if command is a name of variable
@@ -62,6 +72,8 @@ public class Interpreter {
         context.parsedVariable = command;
         command = "pushVarAddr";
       }
+
+
 
       Command cmd = CommandFactory.create(command);
       output.append(cmd.execute(context)).append(" ");

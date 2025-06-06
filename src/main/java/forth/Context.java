@@ -15,6 +15,10 @@ public class Context {
   public int[] memory;
   public int nextFreeAddress;
 
+  private final Stack<Integer> controlFlowStack;
+  public int currentPC;
+  public int whileState;
+
   public Context() {
     numStack = new Stack<>();
     parsedInt = 0;
@@ -23,8 +27,12 @@ public class Context {
     variables = new HashMap<>();
     memory = new int[1024];
     nextFreeAddress = 0;
+    controlFlowStack = new Stack<>();
+    currentPC = 0;
+    whileState = 1;
   }
 
+  // Interface for numStack
   public void pushNum(int num) {
     numStack.push(num);
   }
@@ -39,5 +47,22 @@ public class Context {
   }
   public String printNumStack() {
     return numStack.toString();
+  }
+
+  // Interface for controlFlowStack
+  public void pushPc(int num) {
+    controlFlowStack.push(num);
+  }
+  public int popPc() {
+    return controlFlowStack.pop();
+  }
+  public int peekPc() {
+    return controlFlowStack.peek();
+  }
+  public boolean controlFlowStackIsEmpty() {
+    return controlFlowStack.isEmpty();
+  }
+  public String printControlFlowStack() {
+    return controlFlowStack.toString();
   }
 }
