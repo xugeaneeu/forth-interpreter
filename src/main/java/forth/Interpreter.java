@@ -97,7 +97,9 @@ public class Interpreter {
       log.debug("Command implementation: {}", cmd.getClass().getSimpleName());
       log.debug("Num stack before execution: {} \n Control flow stack before execution {}",
                 context.printNumStack(), context.printControlFlowStack());
+
       String executionResult = cmd.execute(context);
+
       log.debug("Num stack after execution: {} \n Control flow stack after execution {}",
               context.printNumStack(), context.printControlFlowStack());
 

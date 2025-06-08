@@ -42,6 +42,9 @@ public class Context {
   public int peekNum() {
     return numStack.peek();
   }
+  public int numStackSize() {
+    return numStack.size();
+  }
   public boolean numStackIsEmpty() {
     return numStack.isEmpty();
   }
@@ -58,6 +61,9 @@ public class Context {
   }
   public int peekPc() {
     return controlFlowStack.peek();
+  }
+  public int controlFlowStackSize() {
+    return controlFlowStack.size();
   }
   public boolean controlFlowStackIsEmpty() {
     return controlFlowStack.isEmpty();
