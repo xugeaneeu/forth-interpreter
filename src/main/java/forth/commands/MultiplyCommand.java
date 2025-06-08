@@ -8,6 +8,6 @@ public class MultiplyCommand implements Command {
         int a = context.popNum();
         int b = context.popNum();
         context.pushNum(a * b);
-        return context.printNumStack();
+        return "";
     }
 }

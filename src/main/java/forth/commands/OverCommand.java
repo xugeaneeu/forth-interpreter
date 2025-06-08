@@ -9,6 +9,6 @@ public class OverCommand implements Command {
         int a = context.peekNum();
         context.pushNum(b);
         context.pushNum(a);
-        return context.printNumStack();
+        return "";
     }
 }

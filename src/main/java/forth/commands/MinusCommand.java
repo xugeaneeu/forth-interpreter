@@ -8,6 +8,6 @@ public class MinusCommand implements Command {
         int b = context.popNum();
         int a = context.popNum();
         context.pushNum(a - b);
-        return context.printNumStack();
+        return "";
     }
 }

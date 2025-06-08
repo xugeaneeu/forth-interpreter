@@ -11,6 +11,6 @@ public class DivideCommand implements Command {
         }
         int a = context.popNum();
         context.pushNum(a/b);
-        return context.printNumStack();
+        return "";
     }
 }

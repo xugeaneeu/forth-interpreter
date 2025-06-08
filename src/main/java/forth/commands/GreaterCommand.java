@@ -8,6 +8,6 @@ public class GreaterCommand implements Command {
         int b = context.popNum();
         int a = context.popNum();
         context.pushNum(a > b ? 1 : 0);
-        return context.printNumStack();
+        return "";
     }
 }

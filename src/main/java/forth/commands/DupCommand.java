@@ -7,6 +7,6 @@ public class DupCommand implements Command {
     public String execute(Context context) {
         int a = context.peekNum();
         context.pushNum(a);
-        return context.printNumStack();
+        return "";
     }
 }

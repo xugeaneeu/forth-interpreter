@@ -11,6 +11,6 @@ public class RotCommand implements Command {
         context.pushNum(c);
         context.pushNum(a);
         context.pushNum(b);
-        return context.printNumStack();
+        return "";
     }
 }

@@ -9,6 +9,6 @@ public class SwapCommand implements Command {
         int a = context.popNum();
         context.pushNum(b);
         context.pushNum(a);
-        return context.printNumStack();
+        return "";
     }
 }
