@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Appenders>
+    <RollingFile name="InfoFile"
+                 fileName="logs/forth-info.log"
+                 filePattern="logs/archive/forth-info-%d{yyyy-MM-dd}-%i.log.gz">
+      <PatternLayout pattern="%-5p %c{1} - %msg%n"/>
+      <Filters>
+        <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+      </Filters>
+      <Policies>
+        <SizeBasedTriggeringPolicy size="10 MB"/>
+      </Policies>
+    </RollingFile>
+
+    <RollingFile name="DebugFile"
+                 fileName="logs/forth-debug.log"
+                 filePattern="logs/archive/forth-debug-%d{yyyy-MM-dd}-%i.log.gz">
+      <PatternLayout pattern="%-5p %c{1} - %msg%n"/>
+      <Filters>
+        <LevelMatchFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+      </Filters>
+      <Policies>
+        <SizeBasedTriggeringPolicy size="10 MB"/>
+      </Policies>
+    </RollingFile>
+  </Appenders>
+
+  <Loggers>
+    <Logger name="forth" level="debug" additivity="false">
+      <AppenderRef ref="InfoFile"/>
+      <AppenderRef ref="DebugFile"/>
+    </Logger>
+
+    <Root level="info">
+      <AppenderRef ref="InfoFile"/>
+    </Root>
+  </Loggers>
+</Configuration>
